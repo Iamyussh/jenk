@@ -4,26 +4,41 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-              https://github.com/Iamyussh/jenk.git
+                git branch: 'main', url: 'https://github.com/Iamyussh/jenk.git'
             }
         }
 
         stage('Build') {
             steps {
-                sh 'echo "Building the project..."'
+                script {
+                    sh 'echo "Building the project..."'
+                }
             }
         }
 
         stage('Test') {
             steps {
-                sh 'echo "Running tests..."'
+                script {
+                    sh 'echo "Running tests..."'
+                }
             }
         }
 
         stage('Deploy') {
             steps {
-                sh 'echo "Deploying application..."'
+                script {
+                    sh 'echo "Deploying application..."'
+                }
             }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline executed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed!'
         }
     }
 }
