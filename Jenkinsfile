@@ -22,7 +22,7 @@ pipeline {
             steps {
                 script {
                     echo 'Running the application...'
-                    sh 'java -cp out BrokenApp'
+                    sh 'java -cp out galat'
                 }
             }
         }
