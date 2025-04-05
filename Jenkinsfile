@@ -13,7 +13,7 @@ pipeline {
                 script {
                     echo 'Compiling Java files...'
                     sh 'mkdir -p out'
-                    sh 'javac -d out src/*.java'
+                    sh 'javac -d out ./*.java'
                 }
             }
         }
