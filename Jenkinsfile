@@ -29,6 +29,9 @@ pipeline {
     }
 
     post {
+        always {
+        archiveArtifacts artifacts: '*.log', fingerprint: true
+    }
         success {
             echo '✅ Build succeeded!'
         }
