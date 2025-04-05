@@ -2,32 +2,27 @@ pipeline {
     agent any
 
     stages {
-        stage('Clone Repository') {
+        stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/Iamyussh/jenk.git'
             }
         }
 
-        stage('Build') {
+        stage('Compile Java') {
             steps {
                 script {
-                    sh 'echo "Building the project..."'
+                    echo 'Compiling Java files...'
+                    sh 'mkdir -p out'
+                    sh 'javac -d out src/*.java'
                 }
             }
         }
 
-        stage('Test') {
+        stage('Run App') {
             steps {
                 script {
-                    sh 'echo "Running tests..."'
-                }
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                script {
-                    sh 'echo "Deploying application..."'
+                    echo 'Running the application...'
+                    sh 'java -cp out BrokenApp'
                 }
             }
         }
@@ -35,10 +30,11 @@ pipeline {
 
     post {
         success {
-            echo 'Pipeline executed successfully!'
+            echo '✅ Build succeeded!'
         }
         failure {
-            echo 'Pipeline failed!'
+            echo '❌ Build failed! Check logs above.'
         }
     }
 }
+
